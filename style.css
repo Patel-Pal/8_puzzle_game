@@ -1,0 +1,22 @@
+ #puzzle {
+     width: 312px;
+     display: flex;
+     flex-wrap: wrap;
+     margin: auto;
+ }
+
+ .box {
+     width: 100px;
+     height: 100px;
+     margin: 2px;
+     border: 1px solid #000;
+     font-size: 32px;
+     font-weight: bold;
+     text-align: center;
+     line-height: 100px;
+     cursor: pointer;
+ }
+
+ .empty {
+     background: #ddd;
+ }
