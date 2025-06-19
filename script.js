@@ -1,34 +1,16 @@
-
+let flag = true
 $(document).ready(function () {
 
     let moves = 0
     //suffle
-    function shuffle() {
-        let arr = [1, 2, 3, 4, 5, 6, 7, 8, '']
 
-        arr.sort(() => Math.random() - 0.5)
-
-        $(".box").each(function (n) {
-            let value = arr[n];
-
-            $(this).text(value);
-
-            if (value == '') {
-                $(this).addClass('empty')
-            } else {
-                $(this).removeClass('empty')
-            }
-        })
-
-        moves = 0;
-        $("#moves").text("moves :" + moves)
-        $("win").text('')
-    }
+    shuffle()
     // suffle function call
     $('#shuffle').click(shuffle);
 
     //main logic
     $(".box").click(function () {
+        if (!flag) return;
         let allbox = $(".box");
         let index = allbox.index(this);
         let emptyIndex = allbox.index($(".empty"));
@@ -36,7 +18,7 @@ $(document).ready(function () {
         // console.log("empty index "+emptyIndex)
 
         let validMoves = []
- 
+
         if (index == 0) {
             validMoves = [index + 1, index + 3]
         } else if (index == 1) {
@@ -68,52 +50,84 @@ $(document).ready(function () {
 
             moves++;
             $('#moves').text('Moves: ' + moves);
-            if (checkWin()) {
-                $('#win').text(' Puzzle Solved in ' + moves + ' moves');
-                alert(' Congratulation 🎉<br/> Puzzle Solved in ' + moves + ' moves');
-            } else {
-                $('#win').text(' ');
-            }
+        }
+        if (checkWin()) {
+            $('#win').text(' Puzzle Solved in ' + moves + ' moves');
+
+            setTimeout(function () {
+                alert(' Congratulation 🎉\n Puzzle Solved in ' + moves + ' moves');
+                moves = 0;
+                $('#moves').text('Moves: ' + moves);
+            }, 50);
+        }
+        else {
+            $('#win').text(' ');
         }
 
     })
 
     //function for check win
-    function checkWin() {
-        let win = ['1', '2', '3', '4', '5', '6', '7', '8', ''];
 
-        // Get the current sequence from the puzzle boxes
-        let current = $('.box').map(function () {
-            return $(this).text();
-        }).get();
-
-        for (let i = 0; i < 9; i++) {
-            if (current[i] !== win[i]) {
-                return false;
-            }
-        }
-        return true;
-
-    }
 })
 
+function checkWin() {
+    let win = ['1', '2', '3', '4', '5', '6', '7', '8', ''];
+
+    // Get the current sequence from the puzzle boxes
+    let current = $('.box').map(function () {
+        return $(this).text();
+    }).get();
+
+    for (let i = 0; i < 9; i++) {
+        if (current[i] !== win[i]) {
+            return false;
+        }
+    }
+    return true;
+
+}
+
+function shuffle() {
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, '']
+
+    arr.sort(() => Math.random() - 0.5)
+
+    $(".box").each(function (n) {
+        let value = arr[n];
+
+        $(this).text(value);
+
+        if (value == '') {
+            $(this).addClass('empty')
+        } else {
+            $(this).removeClass('empty')
+        }
+    })
+
+    moves = 0;
+    $("#moves").text("moves :" + moves)
+    $("win").text('')
+    flag = true
+}
 
 
 
-// $("#givup").click(function () {
-//     let arr = [1, 2, 3, 4, 5, 6, 7, 8, '']
-//     $(".box").each(function (n) {
-//         let value = arr[n];
 
-//         $(this).text(value);
+$("#givup").click(function () {
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, '']
+    $(".box").each(function (n) {
+        let value = arr[n];
 
-//         if (value == '') {
-//             $(this).addClass('empty')
-//         } else {
-//             $(this).removeClass('empty')
-//         }
-//     })
-//     moves = 0;
-//     $("#moves").text("moves : " + moves)
+        $(this).text(value);
 
-// })
+        if (value == '') {
+            $(this).addClass('empty')
+        } else {
+            $(this).removeClass('empty')
+        }
+    })
+    moves = 0;
+    $("#moves").text("moves : " + moves)
+    flag = false
+    $("#msg").text("Click on Shuffle button if you want to play again 🙂")
+})
