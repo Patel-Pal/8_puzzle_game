@@ -59,6 +59,8 @@ $(document).ready(function () {
                 moves = 0;
                 $('#moves').text('Moves: ' + moves);
             }, 50);
+            flag = false
+            $("#msg").text("Click on Shuffle button if you want to play again 🙂")
         }
         else {
             $('#win').text(' ');
@@ -66,8 +68,7 @@ $(document).ready(function () {
 
     })
 
-    //function for check win
-
+  
 })
 
 function checkWin() {
@@ -108,6 +109,7 @@ function shuffle() {
     $("#moves").text("moves :" + moves)
     $("win").text('')
     flag = true
+    $("#msg").text('')
 }
 
 
@@ -131,3 +133,4 @@ $("#givup").click(function () {
     flag = false
     $("#msg").text("Click on Shuffle button if you want to play again 🙂")
 })
+
