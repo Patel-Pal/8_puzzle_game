@@ -70,7 +70,7 @@ $(document).ready(function () {
             $('#moves').text('Moves: ' + moves);
             if (checkWin()) {
                 $('#win').text(' Puzzle Solved in ' + moves + ' moves');
-                alert(' Puzzle Solved in ' + moves + ' moves');
+                alert(' Congratulation 🎉<br/> Puzzle Solved in ' + moves + ' moves');
             } else {
                 $('#win').text(' ');
             }
