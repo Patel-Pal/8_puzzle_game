@@ -1,7 +1,7 @@
 let flag = true
+let moves = 0
 $(document).ready(function () {
 
-    let moves = 0
     //suffle
 
     shuffle()
